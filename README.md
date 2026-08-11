@@ -57,12 +57,6 @@ Read the "Why it's organized this way" section below; that's the part that actua
 
 ---
 
-## DAG Workflow
-
-The dependency chain ensures all foreign-key relationships are satisfied before transaction data is loaded.
-
----
-
 ## What each folder is for
 
 - **`dags/`** — Only orchestration code: define tasks, wire up dependencies,
@@ -140,7 +134,6 @@ AIRFLOW_ADMIN_PASSWORD = <your_airflow_admin_password>
 AIRFLOW_ADMIN_EMAIL = <your_email_address>
 ```
 
----
 
 ### 3. Add the CSV Files
 
@@ -211,6 +204,8 @@ The DAG should appear in the Airflow UI
 - The create_tables task executes the SQL files from the sql/ directory and creates the required PostgreSQL tables
 
 - Each CSV loading task loads its corresponding CSV file into PostgreSQL.
+- 
+- The dependency chain ensures all foreign-key relationships are satisfied before transaction data is loaded.
 
 ![Airflow Task Execution](images/airflow02.png)
 
@@ -242,15 +237,15 @@ bankdb
 **airflow_metadata** stores Airflow's internal metadata.
 
 **bankdb** stores the project's business tables:
-
+```
 bankdb
 └── public
     ├── customers
     ├── cards
     ├── merchants
     ├── transactions
+```
 
----
 
 ### 9. Verify the Loaded Data
 
@@ -267,7 +262,7 @@ SELECT COUNT(*) FROM transactions;
 
 ![merchants table](images/pgadmin01.png)
 
----
+
 
 ### 10. Stop the Services
 
@@ -277,7 +272,6 @@ docker compose down
 ```
 The PostgreSQL and pgAdmin data will remain persisted in Docker volumes.
 
----
 
 ### 11. Restart the Project
 
@@ -286,7 +280,6 @@ To start the existing environment again:
 docker compose up -d
 ```
 
----
 
 ### 12. Reset the Entire Environment
 
