@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+.env
+.airflow
+logs/
+.venv/
+.idea/
+.vscode/
+*.drawio
+*.bkp
+database_schema.png
+commands_for_docker.txt
+create_folders.sh
